@@ -19,11 +19,15 @@ function check () {
     diff $actual_file $expected_file
     rm $actual_file
     rm $expected_file
+
+    echo $1 | java -classpath ./src Flipcase > $actual_file
+    echo $2 > $expected_file
+    diff $actual_file $expected_file
+    rm $actual_file
+    rm $expected_file
 }
 
 check "abcz" "ABCZ"
 check "ABCZ" "abcz"
 check "|%@&" "|%@&"
-check "cat DOG bird" "CAT dog BIRD"
-
-echo "ALL TESTS SUCCESSFUL"
+check "cat, DOG, bird" "CAT, dog, BIRD"
